@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import authRoutes from './routes/authRoutes';
 import userRoutes from './routes/userRoutes';
 import postRoutes from "./routes/postRoutes";
@@ -9,6 +10,11 @@ dotenv.config();
 
 const app = express(); // Инициализируем express приложение
 const PORT = process.env.PORT || 3000;
+app.use(cors({
+    origin: '*', // Разрешите ваш фронтенд, замените при необходимости
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Разрешенные методы
+    allowedHeaders: ['Content-Type', 'Authorization'], // Разрешенные заголовки
+}));
 
 // Middleware для обработки JSON
 app.use(express.json());
