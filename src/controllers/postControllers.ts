@@ -9,7 +9,7 @@ import {AuthenticatedRequest} from "../middleware/authMiddleware";
 export const getAllPosts = async (req: Request, res: Response): Promise<void> => {
     try {
         const postRepository = AppDataSource.getRepository(Post);
-        const posts = await postRepository.find({ relations: ['comments'] });
+        const posts = await postRepository.find({ relations: ['creator'] });
         res.status(200).json(posts); // Отправляем ответ
     } catch (error) {
         res.status(500).json({ message: 'Ошибка получения постов', error });
